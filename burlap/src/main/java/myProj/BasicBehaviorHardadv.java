@@ -158,7 +158,7 @@ public class BasicBehaviorHardadv {
 		
 			public void valueIterationExample(String outputPath,int numIter){
 		
-				for(int i=numIter; i<numIter+1;i++){
+				for(int i=1; i<numIter+1;i++){
 					long tStart = System.currentTimeMillis();
 
 					ValueIteration planner = new ValueIteration(domain, 0.99, hashingFactory, 0.001, i);
@@ -173,10 +173,10 @@ public class BasicBehaviorHardadv {
 					
 				}
 				//PolicyUtils.rollout(p, initialState, domain.getModel()).write(outputPath + "vi");
-				Planner planner = new ValueIteration(domain, 0.99, hashingFactory, 0.001, numIter);
-				Policy p = planner.planFromState(initialState);
-				simpleValueFunctionVis((ValueFunction)planner, p);
-				PolicyUtils.rollout(p, initialState, domain.getModel(),numIter).write(outputPath + "vi");
+				//Planner planner = new ValueIteration(domain, 0.99, hashingFactory, 0.001, numIter);
+				//Policy p = planner.planFromState(initialState);
+				//simpleValueFunctionVis((ValueFunction)planner, p);
+				//PolicyUtils.rollout(p, initialState, domain.getModel(),numIter).write(outputPath + "vi");
 				//manualValueFunctionVis((ValueFunction)planner, p);
 		
 			}
@@ -195,9 +195,9 @@ public class BasicBehaviorHardadv {
 						manualValueFunctionVis((ValueFunction)planner, p);
 
 				}
-				Planner planner = new PolicyIteration(domain, 0.99, hashingFactory, 0.001,numIter, numIter);
-				Policy p = planner.planFromState(initialState);
-				manualValueFunctionVis((ValueFunction)planner, p);
+				//Planner planner = new PolicyIteration(domain, 0.99, hashingFactory, 0.001,numIter, numIter);
+				//Policy p = planner.planFromState(initialState);
+				//manualValueFunctionVis((ValueFunction)planner, p);
 				
 		
 				//simpleValueFunctionVis((ValueFunction)planner, p);
@@ -374,8 +374,8 @@ public class BasicBehaviorHardadv {
 				//example.DFSExample(outputPath);
 				//example.AStarExample(outputPath);
 				example.valueIterationExample(outputPath,300);
-				//example.policyIterationExample(outputPath,300);
-				//example.qLearningExample(outputPath,300);
+				example.policyIterationExample(outputPath,300);
+				example.qLearningExample(outputPath,300);
 				//example.sarsaLearningExample(outputPath,300);
 		
 				//example.experimentAndPlotter();

@@ -95,9 +95,9 @@ public class BasicBehavioradv {
 				hashingFactory = new SimpleHashableStateFactory();
 		
 				env = new SimulatedEnvironment(domain, initialState);
-				this.rf=new GoalBasedRF(this.goalCondition, 100, -10);
+				this.rf=new GoalBasedRF(this.goalCondition, 100, -1);
 				GridWorldState rState = new GridWorldState(MAP_SIZE-2,MAP_SIZE-7, new GridLocation((MAP_SIZE-1), (MAP_SIZE-1), "loc0"));
-				this.rf.setReward(rState,-0.1);
+				this.rf.setReward(rState,-10);
 				((FactoredModel)domain.getModel()).setRf(this.rf);
 		
 				//VisualActionObserver observer = new VisualActionObserver(domain, 
@@ -116,7 +116,7 @@ public class BasicBehavioradv {
 		
 			public void valueIterationExample(String outputPath,int numIter){
 		
-				for(int i=numIter; i<numIter+1;i++){
+				for(int i=1; i<numIter+1;i++){
 					long tStart = System.currentTimeMillis();
 
 					ValueIteration planner = new ValueIteration(domain, 0.99, hashingFactory, 0.001, i);
@@ -131,10 +131,10 @@ public class BasicBehavioradv {
 					
 				}
 				//PolicyUtils.rollout(p, initialState, domain.getModel()).write(outputPath + "vi");
-				Planner planner = new ValueIteration(domain, 0.99, hashingFactory, 0.001, numIter);
-				Policy p = planner.planFromState(initialState);
-				simpleValueFunctionVis((ValueFunction)planner, p);
-				PolicyUtils.rollout(p, initialState, domain.getModel(),numIter).write(outputPath + "vi");
+				//Planner planner = new ValueIteration(domain, 0.99, hashingFactory, 0.001, numIter);
+				//Policy p = planner.planFromState(initialState);
+				//simpleValueFunctionVis((ValueFunction)planner, p);
+				//PolicyUtils.rollout(p, initialState, domain.getModel(),numIter).write(outputPath + "vi");
 				//manualValueFunctionVis((ValueFunction)planner, p);
 		
 			}
@@ -153,9 +153,9 @@ public class BasicBehavioradv {
 						manualValueFunctionVis((ValueFunction)planner, p);
 
 				}
-				Planner planner = new PolicyIteration(domain, 0.99, hashingFactory, 0.001,numIter, numIter);
-				Policy p = planner.planFromState(initialState);
-				manualValueFunctionVis((ValueFunction)planner, p);
+				//Planner planner = new PolicyIteration(domain, 0.99, hashingFactory, 0.001,numIter, numIter);
+				//Policy p = planner.planFromState(initialState);
+				//manualValueFunctionVis((ValueFunction)planner, p);
 				
 		
 				//simpleValueFunctionVis((ValueFunction)planner, p);
@@ -330,8 +330,8 @@ public class BasicBehavioradv {
 				//example.BFSExample(outputPath);gen
 				//example.DFSExample(outputPath);
 				//example.AStarExample(outputPath);
-				//example.valueIterationExample(outputPath,100);
-				//example.policyIterationExample(outputPath,100);
+				example.valueIterationExample(outputPath,300);
+				example.policyIterationExample(outputPath,300);
 				example.qLearningExample(outputPath,300);
 				//example.sarsaLearningExample(outputPath,300);
 		

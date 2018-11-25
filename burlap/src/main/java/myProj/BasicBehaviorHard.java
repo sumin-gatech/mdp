@@ -126,7 +126,7 @@ public class BasicBehaviorHard {
 			{0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,0,0}};
 			public BasicBehaviorHard(){
 				gwdg = new GridWorldDomain(map);
-				gwdg.setProbSucceedTransitionDynamics(0.4);
+				gwdg.setProbSucceedTransitionDynamics(0.8);
 				//gwdg.setMapToFourRooms();
 				tf = new GridWorldTerminalFunction((MAP_SIZE-1), (MAP_SIZE-1));
 				gwdg.setTf(tf);
@@ -158,7 +158,7 @@ public class BasicBehaviorHard {
 		
 			public void valueIterationExample(String outputPath,int numIter){
 		
-				for(int i=350; i<numIter+1;i++){
+				for(int i=1; i<numIter+1;i++){
 					long tStart = System.currentTimeMillis();
 
 					ValueIteration planner = new ValueIteration(domain, 0.99, hashingFactory, 0.001, i);
@@ -174,16 +174,16 @@ public class BasicBehaviorHard {
 					
 				}
 				//PolicyUtils.rollout(p, initialState, domain.getModel()).write(outputPath + "vi");
-				Planner planner = new ValueIteration(domain, 0.99, hashingFactory, 0.001, numIter);
-				Policy p = planner.planFromState(initialState);
-				simpleValueFunctionVis((ValueFunction)planner, p);
-				PolicyUtils.rollout(p, initialState, domain.getModel(),numIter).write(outputPath + "vi");
+				//Planner planner = new ValueIteration(domain, 0.99, hashingFactory, 0.001, numIter);
+				//Policy p = planner.planFromState(initialState);
+				//simpleValueFunctionVis((ValueFunction)planner, p);
+				//PolicyUtils.rollout(p, initialState, domain.getModel(),numIter).write(outputPath + "vi");
 				//manualValueFunctionVis((ValueFunction)planner, p);
 		
 			}
 			public void policyIterationExample(String outputPath,int numIter){
 				
-				for(int i=45; i<numIter+1;i++){
+				for(int i=1; i<numIter+1;i++){
 					long tStart = System.currentTimeMillis();
 					PolicyIteration planner = new PolicyIteration(domain, 0.99, hashingFactory, 0.001,i, i);
 					Policy p = planner.planFromState(initialState);
@@ -198,9 +198,9 @@ public class BasicBehaviorHard {
 
 
 				}
-				Planner planner = new PolicyIteration(domain, 0.99, hashingFactory, 0.001,numIter, numIter);
-				Policy p = planner.planFromState(initialState);
-				manualValueFunctionVis((ValueFunction)planner, p);
+				//Planner planner = new PolicyIteration(domain, 0.99, hashingFactory, 0.001,numIter, numIter);
+				//Policy p = planner.planFromState(initialState);
+				//manualValueFunctionVis((ValueFunction)planner, p);
 				
 		
 				//simpleValueFunctionVis((ValueFunction)planner, p);
@@ -210,7 +210,7 @@ public class BasicBehaviorHard {
 			public void qLearningExample(String outputPath,int numIter){
 		
 		
-				QLearning agent = new QLearning(domain, 0.99, hashingFactory, 0., 0.5);
+				QLearning agent = new QLearning(domain, 0.99, hashingFactory, 0., 0.99);
 				long tStart = System.currentTimeMillis();
 				//run learning for 50 episodes
 				for(int i = 1; i < numIter+1; i++){
@@ -374,9 +374,9 @@ public class BasicBehaviorHard {
 				//example.BFSExample(outputPath);gen
 				//example.DFSExample(outputPath);
 				//example.AStarExample(outputPath);
-				//example.valueIterationExample(outputPath,1000);
-				example.policyIterationExample(outputPath,1000);
-				//example.qLearningExample(outputPath,10000);
+				example.valueIterationExample(outputPath,300);
+				example.policyIterationExample(outputPath,300);
+				example.qLearningExample(outputPath,300);
 				//example.sarsaLearningExample(outputPath,300);
 		
 				//example.experimentAndPlotter();
